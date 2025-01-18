@@ -276,3 +276,25 @@ JOIN partywise_results p ON cr.Party_ID = p.Party_ID
 JOIN statewise_results sr ON cr.Parliament_Constituency = sr.Parliament_Constituency
 JOIN states s ON sr.State_ID = s.State_ID
 WHERE s.State = 'Uttar Pradesh' AND cr.Constituency_Name = 'AMETHI';
+
+
+
+/*
+problem statement-12:  What is the distribution of EVM votes versus postal votes for candidates in a specific constituency?
+
+ */
+-- query:
+SELECT 
+    cd.Candidate,
+    cd.Party,
+    cd.EVM_Votes,
+    cd.Postal_Votes,
+    cd.Total_Votes,
+    cr.Constituency_Name
+FROM 
+    constituencywise_details cd
+JOIN 
+    constituencywise_results cr ON cd.Constituency_ID = cr.Constituency_ID
+WHERE 
+    cr.Constituency_Name = 'MATHURA'
+ORDER BY cd.Total_Votes DESC;
