@@ -320,3 +320,29 @@ GROUP BY
     p.Party
 ORDER BY 
     Seats_Won DESC;
+
+
+/*
+problem statement-14:  What is the total number of seats won by each party alliance (NDA, I.N.D.I.A, and OTHER) in each state for the India Elections 2024
+
+ */
+-- query:
+SELECT 
+    s.State AS State_Name,
+    SUM(CASE WHEN p.party_alliance = 'NDA' THEN 1 ELSE 0 END) AS NDA_Seats_Won,
+    SUM(CASE WHEN p.party_alliance = 'I.N.D.I.A' THEN 1 ELSE 0 END) AS INDIA_Seats_Won,
+	SUM(CASE WHEN p.party_alliance = 'OTHER' THEN 1 ELSE 0 END) AS OTHER_Seats_Won
+FROM 
+    constituencywise_results cr
+JOIN 
+    partywise_results p ON cr.Party_ID = p.Party_ID
+JOIN 
+    statewise_results sr ON cr.Parliament_Constituency = sr.Parliament_Constituency
+JOIN 
+    states s ON sr.State_ID = s.State_ID
+WHERE 
+    p.party_alliance IN ('NDA', 'I.N.D.I.A',  'OTHER')  -- Filter for NDA and INDIA alliances
+GROUP BY 
+    s.State
+ORDER BY 
+    s.State;
