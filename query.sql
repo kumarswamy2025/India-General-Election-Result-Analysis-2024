@@ -262,3 +262,17 @@ GROUP BY
     p.party_alliance
 ORDER BY 
     Seats_Won DESC;
+
+
+
+/*
+problem statement-11:  Winning candidate's name, their party name, total votes, and the margin of victory for a specific state and constituency?
+
+ */
+-- query:
+SELECT cr.Winning_Candidate, p.Party, p.party_alliance, cr.Total_Votes, cr.Margin, cr.Constituency_Name, s.State
+FROM constituencywise_results cr
+JOIN partywise_results p ON cr.Party_ID = p.Party_ID
+JOIN statewise_results sr ON cr.Parliament_Constituency = sr.Parliament_Constituency
+JOIN states s ON sr.State_ID = s.State_ID
+WHERE s.State = 'Uttar Pradesh' AND cr.Constituency_Name = 'AMETHI';
