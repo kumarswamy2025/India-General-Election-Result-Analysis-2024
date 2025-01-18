@@ -38,7 +38,7 @@ ORDER BY
     TOTAL_SEATS_BY_EACH_STATE asc;
 
 /*
-problem statement-3: What is the total number of seats available for elections in each state by descending order 
+problem statement-4: What is the total number of seats available for elections in each state by descending order 
 
  */
 -- query: 
